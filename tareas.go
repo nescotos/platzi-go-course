@@ -8,20 +8,20 @@ type task struct {
 	completado  bool
 }
 
-func (t task) marcarCompleta() {
+func (t *task) marcarCompleta() {
 	t.completado = true
 }
 
-func (t task) actualizarDescripcion(descripcion string) {
+func (t *task) actualizarDescripcion(descripcion string) {
 	t.descripcion = descripcion
 }
 
-func (t task) actualizarNombre(nombre string) {
+func (t *task) actualizarNombre(nombre string) {
 	t.nombre = nombre
 }
 
 func main() {
-	t := task{
+	t := &task{
 		nombre:      "Completar mi curso de Go",
 		descripcion: "Completar mi curso de Go de Platzi en esta semana",
 	}

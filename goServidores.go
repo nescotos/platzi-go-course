@@ -16,12 +16,18 @@ func main() {
 		"http://instagram.com",
 	}
 
-	for _, servidor := range servidores {
-		go revisarServidor(servidor, canal)
-	}
+	i := 0
 
-	for i := 0; i < len(servidores); i++ {
+	for {
+		if i > 2 {
+			break
+		}
+		for _, servidor := range servidores {
+			go revisarServidor(servidor, canal)
+		}
+		time.Sleep(1 * time.Second)
 		fmt.Println(<-canal)
+		i++
 	}
 
 	tiempoPaso := time.Since(inicio)
@@ -31,10 +37,8 @@ func main() {
 func revisarServidor(servidor string, canal chan string) {
 	_, err := http.Get(servidor)
 	if err != nil {
-		fmt.Println(servidor, "no esta disponible =(")
 		canal <- servidor + " no se encuentra disponible"
 	} else {
-		fmt.Println(servidor, "esta funcionando normalmente =)")
 		canal <- servidor + "esta funcionando"
 	}
 }

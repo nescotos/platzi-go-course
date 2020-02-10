@@ -5,12 +5,12 @@ import (
 )
 
 type Router struct {
-	rules map[string]http.HandlerFunc
+	rules map[string]map[string]http.HandlerFunc
 }
 
 func NewRouter() *Router {
 	return &Router{
-		rules: make(map[string]http.HandlerFunc),
+		rules: make(map[string]map[string]http.HandlerFunc),
 	}
 }
 
